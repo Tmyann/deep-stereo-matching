@@ -1,6 +1,6 @@
-torch==1.1.0
-torchvision==0.3.0
+torch==1.5.0
+torchvision==0.6.0
 numpy
 pillow
-scipy
+scipy==1.1.0
 tensorboard==1.14.0
