@@ -85,19 +85,15 @@ def train(epoch):
         accuracies = np.append(accuracies, acc)
         batch_times = np.append(batch_times, time.time() - start_time)
 
-        # writer.add_scalar("train_loss", loss, global_step=step)
-        # writer.add_scalar("train_acc", acc, global_step=step)
-        # writer.add_scalar("learning_rate", scheduler.get_lr()[0], global_step=step)
+        writer.add_scalar("train_loss", loss, global_step=step)
+        writer.add_scalar("train_acc", acc, global_step=step)
+        writer.add_scalar("learning_rate", scheduler.get_lr()[0], global_step=step)
 
         if step % 50 == 0:
             epoch_samples = (batch_size * (step // (epoch + 1)))
             mean_time = np.mean(batch_times) * 1000
             print("%d/%d samples, train_acc: %f, train_loss: %f, Time per batch: %fms" % (epoch_samples, samples, np.mean(accuracies), np.mean(losses), mean_time))
             losses, accuracies, batch_times = np.array([]), np.array([]), np.array([])
-            
-            writer.add_scalar("train_loss", np.mean(losses), global_step=step)
-            writer.add_scalar("train_acc", np.mean(accuracies), global_step=step)
-            writer.add_scalar("learning_rate", scheduler.get_lr()[0], global_step=step)
 
         if step % 500 == 0:
             torch.save(model.state_dict(), args.checkpoint)
