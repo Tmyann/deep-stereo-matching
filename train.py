@@ -24,6 +24,7 @@ parser.add_argument("--batch_size", type=int, default=128)
 parser.add_argument("--epochs", type=int, default=1)
 args = parser.parse_args()
 
+checkpoint = args.checkpoint
 batch_size = args.batch_size
 epochs = args.epochs
 
